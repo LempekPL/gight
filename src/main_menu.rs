@@ -1,5 +1,6 @@
 use bevy::prelude::*;
-use crate::{FontAssets, GameState};
+use crate::{GameState, FontAssets, SoundAssets};
+use bevy_kira_audio::Audio;
 
 pub struct MainMenuPlugin;
 
@@ -20,7 +21,12 @@ impl Plugin for MainMenuPlugin {
 fn spawn_main_menu(
     mut commands: Commands,
     font_assets: Res<FontAssets>,
+    sound_assets: Res<SoundAssets>,
+    audio: Res<Audio>
 ) {
+    // play song
+    audio.play_looped(sound_assets.main_menu.clone());
+    // spawn buttons
     commands
         .spawn_bundle(ButtonBundle {
             style: Style {

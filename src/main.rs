@@ -2,6 +2,7 @@ mod main_menu;
 
 use bevy::prelude::*;
 use bevy_asset_loader::{AssetLoader, AssetCollection};
+use bevy_kira_audio::{AudioPlugin, AudioSource};
 
 #[derive(Clone, Eq, PartialEq, Debug, Hash)]
 enum GameState {
@@ -16,11 +17,18 @@ struct FontAssets {
     open_sans_regular: Handle<Font>,
 }
 
+#[derive(AssetCollection)]
+struct SoundAssets {
+    #[asset(path = "sounds/main_menu_song.ogg")]
+    main_menu: Handle<AudioSource>,
+}
+
 fn main() {
     let mut app = App::new();
     AssetLoader::new(GameState::LoadingAssets)
         .continue_to_state(GameState::Loading)
         .with_collection::<FontAssets>()
+        .with_collection::<SoundAssets>()
         .build(&mut app);
     app.insert_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)));
     app.insert_resource(WindowDescriptor {
@@ -33,6 +41,7 @@ fn main() {
     // this will tell the asset loader to load assets after loading assets it will change state loding to initiate setup
     app.add_state(GameState::LoadingAssets);
     app.add_plugins(DefaultPlugins);
+    app.add_plugin(AudioPlugin);
     // main menu systems
     app.add_plugin(main_menu::MainMenuPlugin);
     // initiating setup

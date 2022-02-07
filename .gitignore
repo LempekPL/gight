@@ -12,8 +12,5 @@ testData
 /pretty_printers_tests/target
 /native-helper/target
 
-# Manually added
-.idea/
-
 # Project exclude paths
 /target/
