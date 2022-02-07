@@ -1,9 +1,10 @@
 [package]
-name = "Gight"
-version = "0.1.0"
+name = "gight"
+version = "0.0.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-sdl2 = { version = "0.35.1", features = ["bundled", "static-link"] }
+bevy = "0.6.0"
+bevy_asset_loader = "0.8.0"
